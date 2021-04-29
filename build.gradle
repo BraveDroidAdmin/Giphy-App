@@ -8,6 +8,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$versions.android_studio"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+        classpath "org.jetbrains.kotlin:kotlin-serialization:$versions.kotlin"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$versions.hilt"
         classpath "org.jetbrains.kotlin:kotlin-allopen:$versions.kotlin"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$versions.nav"

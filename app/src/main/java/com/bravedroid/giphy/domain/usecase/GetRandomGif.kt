@@ -5,5 +5,5 @@ import com.bravedroid.giphy.domain.repository.GifRepository
 import javax.inject.Inject
 
 class GetRandomGif @Inject constructor(private val gifRepository: GifRepository) {
-    operator fun invoke(): Gif = gifRepository.getRandom()
+    operator fun invoke() = gifRepository.getRandom()
 }

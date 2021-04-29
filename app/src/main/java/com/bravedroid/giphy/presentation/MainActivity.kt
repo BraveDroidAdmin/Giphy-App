@@ -1,7 +1,8 @@
-package com.bravedroid.giphy
+package com.bravedroid.giphy.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.bravedroid.giphy.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
