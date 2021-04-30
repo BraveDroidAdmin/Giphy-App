@@ -25,22 +25,6 @@ class GiphyModule {
 
     @Singleton
     @Provides
-    fun provideOkHttp(@ApplicationContext appContext: Context): OkHttpClient =
-        OkHttpClient.Builder()
-            .connectTimeout(OK_HTTP_CONNECT_TIMEOUT, TimeUnit.SECONDS)
-            .writeTimeout(OK_HTTP_WRITE_TIMEOUT, TimeUnit.SECONDS)
-            .readTimeout(OK_HTTP_READ_TIMEOUT, TimeUnit.SECONDS)
-            .cache(Cache(appContext.cacheDir, OK_HTTP_CACHE_SIZE))
-//            .addNetworkInterceptor(LoggerInterceptor.logWithStetho)
-            .build()
-
-    @Singleton
-    @Provides
-    fun provideRetrofitConverterFactory() =
-        Json.asConverterFactory("application/json".toMediaType())
-
-    @Singleton
-    @Provides
     fun provideGiphyService(
         okHttpClient: OkHttpClient,
         factory: Converter.Factory,
@@ -50,6 +34,22 @@ class GiphyModule {
         .addConverterFactory(factory)
         .build()
         .create(GiphyService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideOkHttp(@ApplicationContext appContext: Context): OkHttpClient =
+        OkHttpClient.Builder()
+            .connectTimeout(OK_HTTP_CONNECT_TIMEOUT, TimeUnit.SECONDS)
+            .writeTimeout(OK_HTTP_WRITE_TIMEOUT, TimeUnit.SECONDS)
+            .readTimeout(OK_HTTP_READ_TIMEOUT, TimeUnit.SECONDS)
+            .cache(Cache(appContext.cacheDir, OK_HTTP_CACHE_SIZE))
+//            .addNetworkInterceptor(StethoInterceptor())
+            .build()
+
+    @Singleton
+    @Provides
+    fun provideRetrofitConverterFactory() =
+        Json.asConverterFactory("application/json".toMediaType())
 
     private companion object {
         private const val BASE_URL = "https://api.giphy.com/v1/gifs/"

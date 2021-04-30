@@ -86,6 +86,10 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$versions.okhttp"
     implementation "com.squareup.okhttp3:okhttp:$versions.okhttp"
 
+    //Stetho
+    debugImplementation "com.facebook.stetho:stetho:$versions.stetho"
+    debugImplementation "com.facebook.stetho:stetho-okhttp3:$versions.stetho"
+
     //log
     implementation "com.jakewharton.timber:timber:$versions.timber"
 

@@ -52,6 +52,9 @@ versions.kotlinxSerialization = "1.0.1"
 //okHttp
 versions.okhttp = "4.9.0"
 
+//stetho
+versions.stetho = "1.5.1"
+
 //log
 versions.timber = "4.7.1"
 

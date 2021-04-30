@@ -2,6 +2,7 @@ package com.bravedroid.giphy.application
 
 import android.app.Application
 import com.bravedroid.giphy.util.Logger
+import com.facebook.stetho.Stetho
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -22,6 +23,6 @@ class GiphyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        logger.configure()
+        logger.configure(this)
     }
 }
