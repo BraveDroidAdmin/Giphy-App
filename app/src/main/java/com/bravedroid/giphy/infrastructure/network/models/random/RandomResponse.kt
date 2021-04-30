@@ -8,6 +8,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class RandomResponse(
-    @SerialName("data") val `data`: DataDto?,
-    @SerialName("meta") val meta: MetaDto?
+    @SerialName("data") val `data`: DataDto? = null,
+    @SerialName("meta") val meta: MetaDto? = null
 )
