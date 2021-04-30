@@ -108,4 +108,8 @@ dependencies {
     //android test
     androidTestImplementation "androidx.test.ext:junit:$versions.ext_junit"
     androidTestImplementation "androidx.test.espresso:espresso-core:$versions.espresso_core"
+    //hilt android test
+    androidTestImplementation "com.google.dagger:hilt-android-testing:$versions.hilt_android_testing"
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:2.28-alpha"
+
 }
