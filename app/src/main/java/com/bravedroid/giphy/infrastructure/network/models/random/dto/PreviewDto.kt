@@ -6,8 +6,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class PreviewDto(
-    @SerialName("height") val height: String?,
-    @SerialName("mp4") val mp4: String?,
-    @SerialName("mp4_size") val mp4Size: String?,
-    @SerialName("width") val width: String?
+    @SerialName("height") val height: String? = null,
+    @SerialName("mp4") val mp4: String? = null,
+    @SerialName("mp4_size") val mp4Size: String? = null,
+    @SerialName("width") val width: String? = null
 )

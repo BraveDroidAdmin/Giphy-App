@@ -1,5 +1,6 @@
 package com.bravedroid.giphy.infrastructure.network
 
+import androidx.test.filters.LargeTest
 import com.bravedroid.giphy.infrastructure.network.services.GiphyService
 import com.bravedroid.giphy.infrastructure.util.GiphyServiceBadFake
 import com.bravedroid.giphy.infrastructure.util.GiphyServiceFake
@@ -44,12 +45,12 @@ class NetworkDataSourceTest {
         gifFlow.collect()
     }
 
+    @LargeTest
     @Test
     fun testFetchRandomGif() = runBlocking {
         sut = NetworkDataSource(giphyService)
-        val expectedUrl =
-            "https://media0.giphy.com/media/l378tcPSBespR7fjO/200w.gif?cid=840f13ca74f974fd121108b1d0a15571e3a750bc5fd6ee6b&rid=200w.gif&ct=g"
         val gifFlow = sut.fetchRandomGif()
-        Truth.assertThat(gifFlow.first().url).isEqualTo(expectedUrl)
+        Truth.assertThat(gifFlow.first().url).startsWith("https://media")
+        Truth.assertThat(gifFlow.first().url).endsWith("&rid=200w.gif&ct=g")
     }
 }

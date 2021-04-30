@@ -6,14 +6,14 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class OriginalDto(
-    @SerialName("frames") val frames: String?,
-    @SerialName("hash") val hash: String?,
-    @SerialName("height") val height: String?,
-    @SerialName("mp4") val mp4: String?,
-    @SerialName("mp4_size") val mp4Size: String?,
-    @SerialName("size") val size: String?,
-    @SerialName("url") val url: String?,
-    @SerialName("webp") val webp: String?,
-    @SerialName("webp_size") val webpSize: String?,
-    @SerialName("width") val width: String?
+    @SerialName("frames") val frames: String? = null,
+    @SerialName("hash") val hash: String? = null,
+    @SerialName("height") val height: String? = null,
+    @SerialName("mp4") val mp4: String? = null,
+    @SerialName("mp4_size") val mp4Size: String? = null,
+    @SerialName("size") val size: String? = null,
+    @SerialName("url") val url: String? = null,
+    @SerialName("webp") val webp: String? = null,
+    @SerialName("webp_size") val webpSize: String? = null,
+    @SerialName("width") val width: String? = null
 )

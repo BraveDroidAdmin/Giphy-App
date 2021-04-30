@@ -6,8 +6,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class DownsizedDto(
-    @SerialName("height") val height: String?,
-    @SerialName("size") val size: String?,
-    @SerialName("url") val url: String?,
-    @SerialName("width") val width: String?
+    @SerialName("height") val height: String? = null,
+    @SerialName("size") val size: String? = null,
+    @SerialName("url") val url: String? = null,
+    @SerialName("width") val width: String? = null
 )
