@@ -28,8 +28,16 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            applicationIdSuffix ".debug"
+            testCoverageEnabled(project.hasProperty('coverage'))
+            minifyEnabled false
         }
     }
     compileOptions {
