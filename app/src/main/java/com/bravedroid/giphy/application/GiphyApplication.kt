@@ -1,6 +1,7 @@
 package com.bravedroid.giphy.application
 
 import android.app.Application
+import com.bravedroid.giphy.domain.repository.GifRepository
 import com.bravedroid.giphy.util.Logger
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -19,9 +20,12 @@ class GiphyApplication : Application() {
 
     @Inject
     lateinit var logger: Logger
+    @Inject
+    lateinit var gifRepository : GifRepository
 
     override fun onCreate() {
         super.onCreate()
         logger.configure(this)
     }
+
 }

@@ -3,7 +3,11 @@ package com.bravedroid.giphy.di
 import android.content.Context
 import com.bravedroid.giphy.di.factories.OkHttpFactory
 import com.bravedroid.giphy.di.factories.OkHttpFactoryImpl
+import com.bravedroid.giphy.domain.repository.GifRepository
+import com.bravedroid.giphy.domain.usecase.GetRandomGifUseCase
+import com.bravedroid.giphy.infrastructure.network.NetworkDataSource
 import com.bravedroid.giphy.infrastructure.network.services.GiphyService
+import com.bravedroid.giphy.infrastructure.repository.GifRepositoryImpl
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -35,17 +39,28 @@ class GiphyModule {
         .build()
         .create(GiphyService::class.java)
 
-   @Singleton
+    @Singleton
     @Provides
-    fun provideOkHttpClient(@ApplicationContext appContext: Context, okHttpFactory: OkHttpFactory): OkHttpClient =
+    fun provideOkHttpClient(
+        @ApplicationContext appContext: Context,
+        okHttpFactory: OkHttpFactory
+    ): OkHttpClient =
         okHttpFactory.create(appContext)
 
     @Singleton
     @Provides
-    fun provideRetrofitConverterFactory() =
+    fun provideOkHttpFactory(): OkHttpFactory =OkHttpFactoryImpl()
+
+    @Singleton
+    @Provides
+    fun provideRetrofitConverterFactory(): Converter.Factory =
         Json.asConverterFactory("application/json".toMediaType())
 
     private companion object {
         private const val BASE_URL = "https://api.giphy.com/v1/gifs/"
     }
+
+    @Provides
+    fun provideGifRepository(networkDataSource: NetworkDataSource): GifRepository = GifRepositoryImpl(networkDataSource)
+
 }

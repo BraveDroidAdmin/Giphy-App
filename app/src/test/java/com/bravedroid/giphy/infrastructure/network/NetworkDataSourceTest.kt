@@ -34,5 +34,4 @@ class NetworkDataSourceTest {
         val gifFlow = sut.fetchRandomGif()
         gifFlow.collect()
     }
-
 }
