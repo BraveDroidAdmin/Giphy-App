@@ -7,7 +7,7 @@ import com.bravedroid.giphy.infrastructure.network.models.random.RandomResponse
 object GifMapper {
     fun fromRandomResponse(randomResponse: RandomResponse): Gif {
             val url =
-                randomResponse.data?.images?.fixedWidth?.url ?: throw ResourceNotFoundException()
+                randomResponse.data?.images?.downsized?.url ?: throw ResourceNotFoundException()
             return Gif(url)
         }
 }

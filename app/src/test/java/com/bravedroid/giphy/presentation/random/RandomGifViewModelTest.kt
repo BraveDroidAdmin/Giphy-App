@@ -33,7 +33,6 @@ class RandomGifViewModelTest {
     fun setUp() {
     }
 
-
     @Test
     fun getGifUrl() {
         val gif = flowOf(Gif("test"))

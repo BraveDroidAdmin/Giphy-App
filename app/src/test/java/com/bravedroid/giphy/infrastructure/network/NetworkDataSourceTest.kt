@@ -22,7 +22,7 @@ class NetworkDataSourceTest {
         giphyServiceFake = GiphyServiceFake()
         sut = NetworkDataSource(giphyServiceFake)
         val expectedUrl =
-            "https://media0.giphy.com/media/l378tcPSBespR7fjO/200w.gif?cid=840f13ca74f974fd121108b1d0a15571e3a750bc5fd6ee6b&rid=200w.gif&ct=g"
+            "https://media0.giphy.com/media/l378tcPSBespR7fjO/giphy-downsized.gif?cid=840f13ca74f974fd121108b1d0a15571e3a750bc5fd6ee6b&rid=giphy-downsized.gif&ct=g"
         val gifFlow = sut.fetchRandomGif()
         Truth.assertThat(gifFlow.first().url).isEqualTo(expectedUrl)
     }
