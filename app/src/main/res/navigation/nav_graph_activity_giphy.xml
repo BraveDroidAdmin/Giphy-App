@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_activity_giphy"
+    app:startDestination="@id/gifFragment">
+
+    <fragment
+        android:id="@+id/gifFragment"
+        android:name="com.bravedroid.giphy.presentation.GifFragment"
+        android:label="GifFragment" />
+    <activity
+        android:id="@+id/giphyActivity"
+        android:name="com.bravedroid.giphy.presentation.GiphyActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_giphy" />
+    <fragment
+        android:id="@+id/manyGIFsFragment"
+        android:name="com.bravedroid.giphy.presentation.ManyGIFsFragment"
+        android:label="ManyGIFsFragment" />
+</navigation>

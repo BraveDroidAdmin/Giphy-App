@@ -8,6 +8,10 @@ import com.bravedroid.giphy.domain.usecase.GetRandomGifUseCase
 import com.bravedroid.giphy.infrastructure.network.NetworkDataSource
 import com.bravedroid.giphy.infrastructure.network.services.GiphyService
 import com.bravedroid.giphy.infrastructure.repository.GifRepositoryImpl
+import com.bravedroid.giphy.util.ImageLoader
+import com.bravedroid.giphy.util.ImageLoaderImpl
+import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -54,7 +58,10 @@ class GiphyModule {
     @Singleton
     @Provides
     fun provideRetrofitConverterFactory(): Converter.Factory =
-        Json.asConverterFactory("application/json".toMediaType())
+        Json{
+            isLenient = true
+            ignoreUnknownKeys = true
+        }.asConverterFactory("application/json".toMediaType())
 
     private companion object {
         private const val BASE_URL = "https://api.giphy.com/v1/gifs/"
@@ -63,4 +70,20 @@ class GiphyModule {
     @Provides
     fun provideGifRepository(networkDataSource: NetworkDataSource): GifRepository = GifRepositoryImpl(networkDataSource)
 
+}
+
+@Module
+@InstallIn(ApplicationComponent::class)
+class GlideModule {
+    @Singleton
+    @Provides
+    fun providesGlide(
+        @ApplicationContext context: Context,
+    ) = Glide.with(context)
+
+    @Singleton
+    @Provides
+    fun providesImageLoader(
+        glide: RequestManager
+    ): ImageLoader = ImageLoaderImpl(glide)
 }
