@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bravedroid.giphy.R
 import com.bravedroid.giphy.databinding.FragmentGifBinding
-import com.bravedroid.giphy.presentation.random.RandomGifViewModel
 import com.bravedroid.giphy.util.ImageLoader
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

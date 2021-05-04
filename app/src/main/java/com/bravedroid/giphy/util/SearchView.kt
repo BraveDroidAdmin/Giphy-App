@@ -6,18 +6,18 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewAnimationUtils
-import android.widget.FrameLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.bravedroid.giphy.databinding.ViewSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SearchView constructor(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
+class SearchView constructor(context: Context, attrs: AttributeSet) :
+    ConstraintLayout(context, attrs) {
 
     private var binding: ViewSearchBinding =
         ViewSearchBinding.inflate(LayoutInflater.from(context), this, true)
 
     init {
-        //LayoutInflater.from(context).inflate(R.layout.view_search, this, true)
         binding.openSearchButton.setOnClickListener { openSearch() }
         binding.closeSearchButton.setOnClickListener { closeSearch() }
     }
@@ -56,5 +56,4 @@ class SearchView constructor(context: Context, attrs: AttributeSet) : FrameLayou
             }
         })
     }
-
 }

@@ -1,4 +1,4 @@
-package com.bravedroid.giphy.presentation.random
+package com.bravedroid.giphy.presentation
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject

@@ -6,6 +6,7 @@ import androidx.lifecycle.SavedStateHandle
 import com.bravedroid.giphy.domain.Gif
 import com.bravedroid.giphy.domain.usecase.GetRandomGifUseCase
 import com.bravedroid.giphy.infrastructure.util.CoroutineTestRule
+import com.bravedroid.giphy.presentation.RandomGifViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import org.junit.Before
