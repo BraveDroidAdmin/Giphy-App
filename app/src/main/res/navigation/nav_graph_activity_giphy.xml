@@ -9,11 +9,7 @@
         android:id="@+id/gifFragment"
         android:name="com.bravedroid.giphy.presentation.GifFragment"
         android:label="GifFragment" />
-    <activity
-        android:id="@+id/giphyActivity"
-        android:name="com.bravedroid.giphy.presentation.GiphyActivity"
-        android:label="activity_main"
-        tools:layout="@layout/activity_giphy" />
+
     <fragment
         android:id="@+id/manyGIFsFragment"
         android:name="com.bravedroid.giphy.presentation.ManyGIFsFragment"

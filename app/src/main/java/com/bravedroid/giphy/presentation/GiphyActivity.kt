@@ -1,13 +1,13 @@
 package com.bravedroid.giphy.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import com.bravedroid.giphy.R
 import com.bravedroid.giphy.databinding.ActivityGiphyBinding
-import com.bravedroid.giphy.util.ImageLoader
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class GiphyActivity : AppCompatActivity() {
@@ -32,5 +32,11 @@ class GiphyActivity : AppCompatActivity() {
 //                it
 //            )
 //        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        navController = this.findNavController(R.id.fragmentContainerView)
+        navController.navigate(R.id.gifFragment)
     }
 }

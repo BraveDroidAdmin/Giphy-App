@@ -2,6 +2,7 @@ package com.bravedroid.giphy.presentation
 
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bravedroid.giphy.R
@@ -33,6 +34,21 @@ class GifFragment : Fragment(R.layout.fragment_gif) {
                 it
             )
         }
+    }
+
+    fun setupSingleLayout() {
+        val gifAdapter = GifAdapter(::setSingleMasterContent)
+        binding.gifsRecyclerView.adapter = gifAdapter
+//        activityViewModel.listings.observe(viewLifecycleOwner) {
+//            gifAdapter.submitList(it)
+//        }
+    }
+
+    private fun setSingleMasterContent(gifUiModel: GifUiModel, imageView: ImageView){
+        imageLoader.setImageViewWithGlide(
+            imageView,
+            gifUiModel.url
+        )
     }
 
     override fun onDestroyView() {

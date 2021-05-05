@@ -6,13 +6,37 @@
     android:layout_height="match_parent"
     tools:context=".presentation.GifFragment">
 
+    <com.bravedroid.giphy.util.SearchView
+        android:id="@+id/gif_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/gif_IV"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_margin="24dp"
+        android:scaleType="fitXY"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/gif_search" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/gifsRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="24dp"
+        android:overScrollMode="never"
+        android:visibility="visible"
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gif_search" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
