@@ -52,7 +52,19 @@ android {
         viewBinding true
         //dataBinding true
     }
+    testOptions {
+        unitTests.all {
+            if (it.name == 'testDebugUnitTest') {
+                def withTestIntegration = project.hasProperty('withTestIntegration')
+                println ("withTestIntegration "+ withTestIntegration )
+                if (!withTestIntegration){
+                    it.exclude("**/*TestIntegration.class")
+                }
+            }
+        }
+    }
 }
+
 
 dependencies {
     //jvm

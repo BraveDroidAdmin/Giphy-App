@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.navigation.NavController
+import com.bravedroid.giphy.R
 import com.bravedroid.giphy.databinding.ActivityGiphyBinding
 import com.bravedroid.giphy.util.ImageLoader
 import dagger.hilt.android.AndroidEntryPoint
@@ -12,8 +13,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class GiphyActivity : AppCompatActivity() {
 
-//    @Inject
-//    lateinit var imageLoader: ImageLoader
+    @Inject
+    lateinit var imageLoader: ImageLoader
 
     private lateinit var binding: ActivityGiphyBinding
     private lateinit var navController: NavController
@@ -25,12 +26,12 @@ class GiphyActivity : AppCompatActivity() {
         binding = ActivityGiphyBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        viewModel.loadContent()
-//        viewModel.gifUrl.observe(this) {
-//            imageLoader.setImageViewWithGlide(
-//                binding.gifIV,
-//                it
-//            )
-//        }
+        viewModel.loadContent()
+        viewModel.gifUrl.observe(this) {
+            imageLoader.setImageViewWithGlide(
+                binding.gifIV,
+                it
+            )
+        }
     }
 }
