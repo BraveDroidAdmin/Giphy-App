@@ -5,6 +5,10 @@ import android.view.View
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
+import androidx.recyclerview.widget.StaggeredGridLayoutManager.GAP_HANDLING_NONE
 import com.bravedroid.giphy.R
 import com.bravedroid.giphy.databinding.FragmentGifBinding
 import com.bravedroid.giphy.util.ImageLoader
@@ -45,7 +49,7 @@ class GifFragment : Fragment(R.layout.fragment_gif) {
     }
 
     private fun setupSingleLayout() {
-        val gifAdapter = GifAdapter(::setSingleMasterContent)
+        val gifAdapter = GifAdapter(imageLoader,::setSingleMasterContent)
         binding.gifsRecyclerView.adapter = gifAdapter
         viewModel.gifsUrl.observe(viewLifecycleOwner) {
             gifAdapter.submitList(it)

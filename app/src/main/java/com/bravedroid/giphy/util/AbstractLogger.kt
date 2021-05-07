@@ -16,4 +16,5 @@ abstract class AbstractLogger {
     abstract fun configure(context: Context)
 
     fun log(message: String, tag: String = "logger") = Timber.tag(tag).d(message)
+    fun logError(errorMessage: String, tag: String = "logger") = Timber.tag(tag).e(errorMessage)
 }

@@ -11,10 +11,16 @@ interface ImageLoader {
         imageView: ImageView,
         keyOfUrl: String,
     )
+
+    fun setImageViewWithGlide2(
+        imageView: ImageView,
+        keyOfUrl: String,
+    )
+
 }
 
 @OpenForTesting
-class ImageLoaderImpl (
+class ImageLoaderImpl(
     private var glide: RequestManager
 ) : ImageLoader {
     override fun setImageViewWithGlide(
@@ -24,7 +30,19 @@ class ImageLoaderImpl (
         with(keyOfUrl) {
             glide.load(this)
                 .placeholder(R.drawable.placeholder)
-                .centerCrop()
+                .dontTransform()
+                .into(imageView)
+        }
+    }
+
+    override fun setImageViewWithGlide2(
+        imageView: ImageView,
+        keyOfUrl: String,
+    ) {
+        with(keyOfUrl) {
+            glide.load(this)
+                .placeholder(R.drawable.placeholder)
+                .fitCenter()
                 .into(imageView)
         }
     }
