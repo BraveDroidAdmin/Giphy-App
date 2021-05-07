@@ -1,12 +1,20 @@
-plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-    id 'dagger.hilt.android.plugin'
-    id 'kotlin-allopen'
-    id 'androidx.navigation.safeargs.kotlin'
-    id 'kotlin-kapt'
-    id 'org.jetbrains.kotlin.plugin.serialization'
-}
+//plugins {
+//    id 'com.android.application'
+//    id 'kotlin-android'
+//    id 'dagger.hilt.android.plugin'
+//    id 'kotlin-allopen'
+//    id 'androidx.navigation.safeargs.kotlin'
+//    id 'org.jetbrains.kotlin.plugin.serialization'
+//    id 'kotlin-kapt'
+//}
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-allopen'
+apply plugin: 'dagger.hilt.android.plugin'
+apply plugin: 'kotlinx-serialization'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+apply plugin: 'kotlin-kapt'
 
 allOpen {
     // allows mocking for classes w/o directly opening them for release builds
@@ -49,8 +57,8 @@ android {
     }
 
     buildFeatures {
-        viewBinding = true
-        dataBinding = true
+        viewBinding true
+        dataBinding true
     }
 }
 
