@@ -27,21 +27,29 @@ class GifFragment : Fragment(R.layout.fragment_gif) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentGifBinding.bind(view)
 
-        viewModel.loadContent()
+//        viewModel.loadContent()
         viewModel.gifUrl.observe(viewLifecycleOwner) {
-            imageLoader.setImageViewWithGlide(
-                binding.gifIV,
-                it
-            )
+//            imageLoader.setImageViewWithGlide(
+//                binding.gifIV,
+//                it
+//            )
         }
+//        setupSingleLayout()
     }
 
-    fun setupSingleLayout() {
+    override fun onStart() {
+        super.onStart()
+        viewModel.loadContent()
+        setupSingleLayout()
+
+    }
+
+    private fun setupSingleLayout() {
         val gifAdapter = GifAdapter(::setSingleMasterContent)
         binding.gifsRecyclerView.adapter = gifAdapter
-//        activityViewModel.listings.observe(viewLifecycleOwner) {
-//            gifAdapter.submitList(it)
-//        }
+        viewModel.gifsUrl.observe(viewLifecycleOwner) {
+            gifAdapter.submitList(it)
+        }
     }
 
     private fun setSingleMasterContent(gifUiModel: GifUiModel, imageView: ImageView){

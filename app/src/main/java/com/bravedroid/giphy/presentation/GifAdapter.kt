@@ -7,8 +7,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bravedroid.giphy.databinding.GifBinding
+import javax.inject.Inject
 
-class GifAdapter(
+class GifAdapter @Inject constructor(
+
     private val callback: (gifUiModel: GifUiModel, imageView: ImageView) -> Unit
 ) : ListAdapter<GifUiModel, GifAdapter.GifViewHolder>(DiffUtilCallBack) {
 
@@ -35,6 +37,7 @@ class GifAdapter(
             holder: GifViewHolder,
             callback: (gifUiModel: GifUiModel, imageView: ImageView) -> Unit,
         ) {
+            holder.itemView.callback.invoke(gifUiModel, binding.gifIV)
             holder.itemView.setOnClickListener {
                 callback.invoke(gifUiModel, binding.gifIV)
             }
