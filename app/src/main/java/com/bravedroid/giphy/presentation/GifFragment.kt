@@ -3,15 +3,14 @@ package com.bravedroid.giphy.presentation
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
-import androidx.recyclerview.widget.StaggeredGridLayoutManager.GAP_HANDLING_NONE
+import androidx.lifecycle.observe
 import com.bravedroid.giphy.R
 import com.bravedroid.giphy.databinding.FragmentGifBinding
 import com.bravedroid.giphy.util.ImageLoader
+import com.bravedroid.giphy.util.SearchView
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -27,36 +26,43 @@ class GifFragment : Fragment(R.layout.fragment_gif) {
     private val viewModel: RandomGifViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentGifBinding.bind(view)
-
-//        viewModel.loadContent()
-        viewModel.gifUrl.observe(viewLifecycleOwner) {
-//            imageLoader.setImageViewWithGlide(
-//                binding.gifIV,
-//                it
-//            )
-        }
-//        setupSingleLayout()
     }
 
     override fun onStart() {
         super.onStart()
         viewModel.loadContent()
-        setupSingleLayout()
+        viewModel.randomGifUrl.observe(viewLifecycleOwner) {
+            imageLoader.setImageViewWithGlide(
+                binding.gifIV,
+                it
+            )
+            binding.gifsRecyclerView.isVisible = false
+        }
+        binding.gifSearch.listener = object : SearchView.Listener {
+            override fun onStartTypingOnEditText() {
+                binding.gifIV.isVisible = false
+                binding.gifsRecyclerView.isVisible = true
+                setUpGifsRecyclerView()
+            }
 
+            override fun onclearEditText() {
+                    binding.gifIV.isVisible = true
+                    binding.gifsRecyclerView.isVisible = false
+            }
+        }
     }
 
-    private fun setupSingleLayout() {
-        val gifAdapter = GifAdapter(imageLoader,::setSingleMasterContent)
+    private fun setUpGifsRecyclerView() {
+        val gifAdapter = GifAdapter(imageLoader, ::setUpRandomGifView)
         binding.gifsRecyclerView.adapter = gifAdapter
-        viewModel.gifsUrl.observe(viewLifecycleOwner) {
+        viewModel.allGifsUrl.observe(viewLifecycleOwner) {
             gifAdapter.submitList(it)
         }
     }
 
-    private fun setSingleMasterContent(gifUiModel: GifUiModel, imageView: ImageView){
+    private fun setUpRandomGifView(gifUiModel: GifUiModel, imageView: ImageView) {
         imageLoader.setImageViewWithGlide(
             imageView,
             gifUiModel.url
@@ -69,7 +75,6 @@ class GifFragment : Fragment(R.layout.fragment_gif) {
     }
 
     companion object {
-
         @JvmStatic
         fun newInstance() = GifFragment()
     }

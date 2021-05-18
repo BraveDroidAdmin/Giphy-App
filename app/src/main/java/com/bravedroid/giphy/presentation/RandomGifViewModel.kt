@@ -17,11 +17,11 @@ class RandomGifViewModel @ViewModelInject constructor(
     private val logger: Logger,
 ) : ViewModel() {
 
-    private val _gifUrl = MutableLiveData<String>()
-    val gifUrl: LiveData<String> = _gifUrl
+    private val _randomGifUrl = MutableLiveData<String>()
+    val randomGifUrl: LiveData<String> = _randomGifUrl
 
-    private val _gifsUrl = MutableLiveData<List<GifUiModel>>()
-    val gifsUrl: LiveData<List<GifUiModel>> = _gifsUrl
+    private val _allGifsUrl = MutableLiveData<List<GifUiModel>>()
+    val allGifsUrl: LiveData<List<GifUiModel>> = _allGifsUrl
 
     fun loadContent() {
         viewModelScope.launch {
@@ -30,7 +30,7 @@ class RandomGifViewModel @ViewModelInject constructor(
                     logger.logError(cause.message.toString(), "getRandomGifUseCase" )
                 }
                 .collect {
-                _gifUrl.value = it.url
+                _randomGifUrl.value = it.url
             }
 
             getGifsUseCase.invoke().collect { list ->
@@ -38,7 +38,7 @@ class RandomGifViewModel @ViewModelInject constructor(
                 list.forEach {
                     gifsList.add(GifUiModel(it.url))
                 }
-                _gifsUrl.value = gifsList
+                _allGifsUrl.value = gifsList
             }
         }
     }

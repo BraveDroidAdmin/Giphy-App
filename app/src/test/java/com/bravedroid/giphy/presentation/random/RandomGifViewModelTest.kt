@@ -43,7 +43,7 @@ class RandomGifViewModelTest {
         `when`(getRandomGifUseCaseMock.invoke()).thenReturn(gif)
         val observerMock = mock(Observer::class.java) as Observer<String>
 
-        sut.gifUrl.observeForever(observerMock)
+        sut.randomGifUrl.observeForever(observerMock)
         sut.loadContent()
 
         verify(observerMock).onChanged("test")
