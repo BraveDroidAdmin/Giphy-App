@@ -44,7 +44,7 @@ class RandomGifViewModelTest {
         val observerMock = mock(Observer::class.java) as Observer<String>
 
         sut.randomGifUrl.observeForever(observerMock)
-        sut.loadContent()
+        sut.loadRandomGifContent()
 
         verify(observerMock).onChanged("test")
     }

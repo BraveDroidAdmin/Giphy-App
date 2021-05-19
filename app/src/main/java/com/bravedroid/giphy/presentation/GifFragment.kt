@@ -34,7 +34,7 @@ class GifFragment : Fragment(R.layout.fragment_gif) {
 
     override fun onStart() {
         super.onStart()
-        viewModel.loadContent(myQuery)
+        viewModel.loadRandomGifContent()
         viewModel.randomGifUrl.observe(viewLifecycleOwner) {
             setUpRandomGifView(it, binding.gifIV)
         }
@@ -45,9 +45,9 @@ class GifFragment : Fragment(R.layout.fragment_gif) {
         binding.gifSearch.listener = object : SearchView.Listener {
 
             override fun onStartTypingOnEditText(query: String) {
+                viewModel.loadSearchGifsContent(query)
                 binding.gifsRecyclerView.isVisible = true
                 binding.gifIV.isVisible = false
-                myQuery = query
             }
 
             override fun onClearEditText() {
