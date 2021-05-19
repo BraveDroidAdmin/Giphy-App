@@ -4,8 +4,12 @@ import com.bravedroid.giphy.domain.Gif
 import com.bravedroid.giphy.domain.exception.ResourceNotFoundException
 import com.bravedroid.giphy.infrastructure.network.models.random.RandomResponse
 import com.bravedroid.giphy.infrastructure.network.models.search.SearchResponse
+import com.bravedroid.giphy.util.Logger
+import javax.inject.Inject
 
-object GifMapper {
+class GifMapper @Inject constructor() {
+    @Inject
+    lateinit var logger: Logger
     fun fromRandomResponse(randomResponse: RandomResponse): Gif {
         val url =
             randomResponse.data?.images?.downsized?.url ?: throw ResourceNotFoundException()
@@ -15,7 +19,12 @@ object GifMapper {
     fun fromSearchResponse(searchResponse: SearchResponse): List<Gif> {
         val myList = mutableListOf<Gif>()
         searchResponse.data?.forEach {
-            myList.add(Gif(it.images?.downsized?.url ?: throw ResourceNotFoundException()))
+            if (it.images?.downsized?.url != null) {
+                logger.log("TRY downsized ", "GIF_MAPPER")
+                myList.add(Gif(it.images.downsized.url))
+            } else {
+                logger.log("NO downsized ", "GIF_MAPPER")
+            }
         }
         return myList
     }

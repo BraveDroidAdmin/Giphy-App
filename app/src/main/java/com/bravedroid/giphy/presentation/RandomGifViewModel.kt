@@ -27,7 +27,7 @@ class RandomGifViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             getRandomGifUseCase.invoke()
                 .catch { cause ->
-                    logger.logError(cause.message.toString(), "getRandomGifUseCase")
+                    logger.logError(cause.message.toString(), "GET_RANDOM_GIF_USECASE")
                 }
                 .collect {
                     _randomGifUrl.value = GifUiModel(it.url)
@@ -37,7 +37,11 @@ class RandomGifViewModel @ViewModelInject constructor(
 
     fun loadSearchGifsContent(query: String) {
         viewModelScope.launch {
-            getGifsUseCase.invoke(query).collect { list ->
+            getGifsUseCase.invoke(query)
+                .catch { cause ->
+                    logger.logError(cause.message.toString(), "GET_GIFS_USECASE")
+                }
+                .collect { list ->
                 val gifsList = mutableListOf<GifUiModel>()
                 list.forEach {
                     gifsList.add(GifUiModel(it.url))

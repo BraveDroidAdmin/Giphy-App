@@ -6,7 +6,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bravedroid.giphy.databinding.GifBinding
+import com.bravedroid.giphy.databinding.ItemGifBinding
 import com.bravedroid.giphy.util.ImageLoader
 import javax.inject.Inject
 
@@ -24,10 +24,10 @@ class GifAdapter @Inject constructor(
         holder.bind(item, callback, imageLoader)
     }
 
-    class GifViewHolder(private val binding: GifBinding) : RecyclerView.ViewHolder(binding.root) {
+    class GifViewHolder(private val binding: ItemGifBinding) : RecyclerView.ViewHolder(binding.root) {
         companion object {
             fun from(parent: ViewGroup) = GifViewHolder(
-                GifBinding.inflate(
+                ItemGifBinding.inflate(
                     LayoutInflater.from(parent.context), parent, false
                 )
             )
@@ -38,7 +38,7 @@ class GifAdapter @Inject constructor(
             callback: ((gifUiModel: GifUiModel, imageView: ImageView) -> Unit)? = null,
             imageLoader: ImageLoader,
         ) {
-            imageLoader.setImageViewWithGlide2(binding.gifIV, gifUiModel.url)
+            imageLoader.setImageViewWithNoTransform(binding.gifIV, gifUiModel.url)
 //            holder.itemView.setOnClickListener {
 //                callback.invoke(gifUiModel, binding.gifIV)
 //            }

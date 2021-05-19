@@ -10,6 +10,7 @@ import androidx.lifecycle.observe
 import com.bravedroid.giphy.R
 import com.bravedroid.giphy.databinding.FragmentGifBinding
 import com.bravedroid.giphy.util.ImageLoader
+import com.bravedroid.giphy.util.Logger
 import com.bravedroid.giphy.util.SearchView
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -20,6 +21,9 @@ class GifFragment : Fragment(R.layout.fragment_gif) {
     @Inject
     lateinit var imageLoader: ImageLoader
 
+    @Inject
+    lateinit var logger: Logger
+
     private var _binding: FragmentGifBinding? = null
     private val binding get() = _binding!!
 
@@ -29,6 +33,7 @@ class GifFragment : Fragment(R.layout.fragment_gif) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        logger.log("onViewCreated","@@@@@@@@@@@@@@@@GifFragment")
         _binding = FragmentGifBinding.bind(view)
     }
 
@@ -58,7 +63,7 @@ class GifFragment : Fragment(R.layout.fragment_gif) {
     }
 
     private fun setUpRandomGifView(gifUiModel: GifUiModel, imageView: ImageView) {
-        imageLoader.setImageViewWithGlide(
+        imageLoader.setImageViewWithNoTransform(
             imageView,
             gifUiModel.url
         )

@@ -7,23 +7,17 @@ import com.bumptech.glide.RequestManager
 
 @OpenForTesting
 interface ImageLoader {
-    fun setImageViewWithGlide(
+    fun setImageViewWithNoTransform(
         imageView: ImageView,
         keyOfUrl: String,
     )
-
-    fun setImageViewWithGlide2(
-        imageView: ImageView,
-        keyOfUrl: String,
-    )
-
 }
 
 @OpenForTesting
 class ImageLoaderImpl(
     private var glide: RequestManager
 ) : ImageLoader {
-    override fun setImageViewWithGlide(
+    override fun setImageViewWithNoTransform(
         imageView: ImageView,
         keyOfUrl: String,
     ) {
@@ -31,18 +25,6 @@ class ImageLoaderImpl(
             glide.load(this)
                 .placeholder(R.drawable.placeholder)
                 .dontTransform()
-                .into(imageView)
-        }
-    }
-
-    override fun setImageViewWithGlide2(
-        imageView: ImageView,
-        keyOfUrl: String,
-    ) {
-        with(keyOfUrl) {
-            glide.load(this)
-                .placeholder(R.drawable.placeholder)
-                .fitCenter()
                 .into(imageView)
         }
     }
