@@ -6,14 +6,13 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bravedroid.giphy.R
 import com.bravedroid.giphy.databinding.GifBinding
 import com.bravedroid.giphy.util.ImageLoader
 import javax.inject.Inject
 
 class GifAdapter @Inject constructor(
     private val imageLoader: ImageLoader,
-    private val callback: (gifUiModel: GifUiModel, imageView: ImageView) -> Unit
+    private val callback: ((gifUiModel: GifUiModel, imageView: ImageView) -> Unit)? = null
 ) : ListAdapter<GifUiModel, GifAdapter.GifViewHolder>(DiffUtilCallBack) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GifViewHolder {
@@ -36,10 +35,10 @@ class GifAdapter @Inject constructor(
 
         fun bind(
             gifUiModel: GifUiModel,
-            callback: (gifUiModel: GifUiModel, imageView: ImageView) -> Unit,
+            callback: ((gifUiModel: GifUiModel, imageView: ImageView) -> Unit)? = null,
             imageLoader: ImageLoader,
         ) {
-            imageLoader.setImageViewWithGlide2(binding.gifIV,gifUiModel.url)
+            imageLoader.setImageViewWithGlide2(binding.gifIV, gifUiModel.url)
 //            holder.itemView.setOnClickListener {
 //                callback.invoke(gifUiModel, binding.gifIV)
 //            }

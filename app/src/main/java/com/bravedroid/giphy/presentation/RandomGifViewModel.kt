@@ -17,23 +17,23 @@ class RandomGifViewModel @ViewModelInject constructor(
     private val logger: Logger,
 ) : ViewModel() {
 
-    private val _randomGifUrl = MutableLiveData<String>()
-    val randomGifUrl: LiveData<String> = _randomGifUrl
+    private val _randomGifUrl = MutableLiveData<GifUiModel>()
+    val randomGifUrl: LiveData<GifUiModel> = _randomGifUrl
 
     private val _allGifsUrl = MutableLiveData<List<GifUiModel>>()
     val allGifsUrl: LiveData<List<GifUiModel>> = _allGifsUrl
 
-    fun loadContent() {
+    fun loadContent(query: String) {
         viewModelScope.launch {
             getRandomGifUseCase.invoke()
                 .catch { cause ->
-                    logger.logError(cause.message.toString(), "getRandomGifUseCase" )
+                    logger.logError(cause.message.toString(), "getRandomGifUseCase")
                 }
                 .collect {
-                _randomGifUrl.value = it.url
-            }
+                    _randomGifUrl.value = GifUiModel(it.url)
+                }
 
-            getGifsUseCase.invoke().collect { list ->
+            getGifsUseCase.invoke(query).collect { list ->
                 val gifsList = mutableListOf<GifUiModel>()
                 list.forEach {
                     gifsList.add(GifUiModel(it.url))

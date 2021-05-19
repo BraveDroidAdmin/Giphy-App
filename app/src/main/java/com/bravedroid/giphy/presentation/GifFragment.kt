@@ -25,6 +25,8 @@ class GifFragment : Fragment(R.layout.fragment_gif) {
 
     private val viewModel: RandomGifViewModel by viewModels()
 
+    private var myQuery: String = "dogs"
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentGifBinding.bind(view)
@@ -32,33 +34,26 @@ class GifFragment : Fragment(R.layout.fragment_gif) {
 
     override fun onStart() {
         super.onStart()
-        viewModel.loadContent()
+        viewModel.loadContent(myQuery)
         viewModel.randomGifUrl.observe(viewLifecycleOwner) {
-            imageLoader.setImageViewWithGlide(
-                binding.gifIV,
-                it
-            )
-            binding.gifsRecyclerView.isVisible = false
+            setUpRandomGifView(it, binding.gifIV)
         }
+
+        binding.gifsRecyclerView.isVisible = false
+        setUpGifsRecyclerView()
+
         binding.gifSearch.listener = object : SearchView.Listener {
-            override fun onStartTypingOnEditText() {
-                binding.gifIV.isVisible = false
+
+            override fun onStartTypingOnEditText(query: String) {
                 binding.gifsRecyclerView.isVisible = true
-                setUpGifsRecyclerView()
+                binding.gifIV.isVisible = false
+                myQuery = query
             }
 
-            override fun onclearEditText() {
-                    binding.gifIV.isVisible = true
-                    binding.gifsRecyclerView.isVisible = false
+            override fun onClearEditText() {
+                binding.gifIV.isVisible = true
+                binding.gifsRecyclerView.isVisible = false
             }
-        }
-    }
-
-    private fun setUpGifsRecyclerView() {
-        val gifAdapter = GifAdapter(imageLoader, ::setUpRandomGifView)
-        binding.gifsRecyclerView.adapter = gifAdapter
-        viewModel.allGifsUrl.observe(viewLifecycleOwner) {
-            gifAdapter.submitList(it)
         }
     }
 
@@ -67,6 +62,14 @@ class GifFragment : Fragment(R.layout.fragment_gif) {
             imageView,
             gifUiModel.url
         )
+    }
+
+    private fun setUpGifsRecyclerView() {
+        val gifAdapter = GifAdapter(imageLoader)
+        binding.gifsRecyclerView.adapter = gifAdapter
+        viewModel.allGifsUrl.observe(viewLifecycleOwner) {
+            gifAdapter.submitList(it)
+        }
     }
 
     override fun onDestroyView() {

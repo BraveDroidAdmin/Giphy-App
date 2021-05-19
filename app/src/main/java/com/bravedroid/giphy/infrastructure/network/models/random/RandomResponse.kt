@@ -1,8 +1,7 @@
 package com.bravedroid.giphy.infrastructure.network.models.random
 
-
-import com.bravedroid.giphy.infrastructure.network.models.random.dto.DataDto
-import com.bravedroid.giphy.infrastructure.network.models.random.dto.MetaDto
+import com.bravedroid.giphy.infrastructure.network.models.dto.DataDto
+import com.bravedroid.giphy.infrastructure.network.models.dto.MetaDto
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

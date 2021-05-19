@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface GifRepository {
     fun getRandom(): Flow<Gif>
-    fun getGifs(): Flow<List<Gif>>
+    fun getGifs(query: String): Flow<List<Gif>>
 }

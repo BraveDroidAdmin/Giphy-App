@@ -40,10 +40,10 @@ class SearchView constructor(context: Context, attrs: AttributeSet) :
                 if (s != null) {
                     if (count >= 1) {
                         logger.log("onTextChanged count >= 1","SEARCH_VIEW")
-                        listener?.onStartTypingOnEditText()
+                        listener?.onStartTypingOnEditText(s.toString())
                     } else {
                         logger.log("onTextChanged count == 0","SEARCH_VIEW")
-                        listener?.onclearEditText()
+                        listener?.onClearEditText()
                     }
                 }
             }
@@ -86,7 +86,7 @@ class SearchView constructor(context: Context, attrs: AttributeSet) :
     }
 
     interface Listener {
-        fun onStartTypingOnEditText()
-        fun onclearEditText()
+        fun onStartTypingOnEditText(query : String)
+        fun onClearEditText()
     }
 }
